@@ -129,7 +129,7 @@ void setup()
   LogTrace("HappyPathSetup", NULL);
 
   Screen.print(3, " > Sensors");
-  SensorInit();
+  int initResult = SensorInit();
 
   Screen.print(3, " > IoT Hub");
   DevKitMQTTClient_SetOption(OPTION_MINI_SOLUTION_NAME, "DevKit-GetStarted");

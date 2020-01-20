@@ -80,11 +80,11 @@ void parseTwinMessage(DEVICE_TWIN_UPDATE_STATE updateState, const char *message)
     json_value_free(root_value);
 }
 
-void SensorInit()
+int SensorInit()
 {
     i2c = new DevI2C(D14, D15);
     hts221Sensor = new HTS221Sensor(*i2c);
-    hts221Sensor->init(NULL);
+    int result = hts221Sensor->init(NULL);
     lps22hbSensor = new LPS22HBSensor(*i2c);
     lps22hbSensor->init(NULL);
 
@@ -92,6 +92,8 @@ void SensorInit()
     temperature = -1000;
     pressure = -1;
     temperature2 = -1000;
+
+    return result;
 }
 
 bool readMessage(int messageId, char *payload, float *temperatureValue, float *humidityValue)
